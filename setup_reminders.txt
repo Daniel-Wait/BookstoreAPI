@@ -1,0 +1,5 @@
+npm init
+npm install express @types/express typescript
+tsc --init
+npm i --save-dev @types/node
+npm install ts-node-dev
