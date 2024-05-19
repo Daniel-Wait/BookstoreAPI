@@ -17,7 +17,14 @@ export class Presentation {
     }
 
     read(req: Request, res: Response): void{
-        const library = this.business_logic.read();
+        const query : Partial<Book> = {};
+        if (req.query.id) query.id = parseInt(req.query.id as string);
+        if (req.query.title) query.title = req.query.title as string;
+        if (req.query.author) query.author = req.query.author as string;
+        if (req.query.genre) query.genre = req.query.genre as string;
+        if (req.query.price) query.price = parseFloat(req.query.price as string);
+
+        const library = this.business_logic.readWithQuery(query);
         res.json(library);
     }
 

@@ -13,7 +13,7 @@ export class DataAccessLayer{
     }
 
     private writeFile() {
-        fs.writeFileSync(DB_FILE_PATH, JSON.stringify(this.library, null, 4));
+        fs.writeFileSync(DB_FILE_PATH, JSON.stringify(this.library, null, 2));
     }
 
     private findBookIdx(id : number){

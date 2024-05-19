@@ -22,6 +22,17 @@ export class BusinessLogicLayer{
         return this.data_access.read();
     }
 
+    readWithQuery(query: Partial<Book>): Book[] {
+        return this.read().filter(book => {
+            for (const key in query) {
+                if (query[key as keyof Book] !== undefined && book[key as keyof Book] !== query[key as keyof Book]) {
+                    return false;
+                }
+            }
+            return true;
+        });
+    }
+
     update(book : Book) {
         const existingBook = this.data_access.read().find(b => b.id === book.id);
         if (!existingBook) {
