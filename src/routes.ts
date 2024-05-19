@@ -9,5 +9,6 @@ router.get('/books', ui.read.bind(ui));
 router.post('/books', ui.create.bind(ui));
 router.put('/books', ui.update.bind(ui));
 router.delete('/books/:id', ui.delete.bind(ui));
+router.get('/books/discounted-price', ui.getDiscountedPrice.bind(ui));
 
 export default router;

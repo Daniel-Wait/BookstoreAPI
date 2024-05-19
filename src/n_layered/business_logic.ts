@@ -48,4 +48,12 @@ export class BusinessLogicLayer{
         }
         this.data_access.delete(id);
     }
+
+    // Discount
+    calculateDiscountedPrice(genre: string, discount: number): number {
+        const books = this.data_access.read().filter(book => book.genre === genre);
+        const totalOriginalPrice = books.reduce((sum: number, book: Book) => sum + book.price, 0);
+        const totalDiscount = totalOriginalPrice * (discount / 100);
+        return totalOriginalPrice - totalDiscount;
+    }
 }

@@ -39,4 +39,18 @@ export class Presentation {
         this.business_logic.delete(id);
         res.status(204).send('Book deleted successfully');
     }
+
+    // Discount
+    getDiscountedPrice(req: Request, res: Response): void {
+        const genre = req.query.genre as string;
+        const discount = parseFloat(req.query.discount as string);
+    
+        if (!genre || isNaN(discount)) {
+          res.status(400).send('Invalid genre or discount percentage');
+          return;
+        }
+    
+        const totalDiscountedPrice = this.business_logic.calculateDiscountedPrice(genre, discount);
+        res.json({ genre, discount_percentage: discount, total_discounted_price: totalDiscountedPrice });
+      }
 }
