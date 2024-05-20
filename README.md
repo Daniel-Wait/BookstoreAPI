@@ -8,14 +8,14 @@ NPM package prerequisites
 >npm install ts-node-dev
 
 To start the server
->tsc
->npm start
+>tsc \
+>npm test
 
 ## Unit Testing
 I was using Postman in VSCode for testing as I go, but I couldn't figure out how to get these into the repo. \
 Instead I settled for using 'curl.exe' in a batch script to test all the CRUD operations.
 
 ## Feedback
-I found this quite challenging. 
-I had to use good deal of ChatGPT and Youtube to get to this stage but I've learned a fair amount from the assignment. \
+I found this quite challenging but I've learned a fair amount from the assignment.
+I had to use good deal of ChatGPT, Stack Overflow, and Youtube to get to this stage. \
 Apologies if it's not quite up to scratch but this is my best effort given zero XP with Javascript.
