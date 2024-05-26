@@ -1,19 +1,14 @@
 import fs from 'fs';
 import { Book } from '../models/book';
-
-const DB_FILE_PATH = './src/data/books.json';
+import { DataBaseJson } from './data_base_json';
 
 export class DataAccessLayer{
     private library : Book[];
+    private database : DataBaseJson;
 
     constructor() {
-        this.library = JSON.parse(
-            fs.readFileSync(DB_FILE_PATH, 'utf-8')
-        );
-    }
-
-    private writeFile() {
-        fs.writeFileSync(DB_FILE_PATH, JSON.stringify(this.library, null, 2));
+        this.database = new DataBaseJson();
+        this.library = this.database.readFile();
     }
 
     private findBookIdx(id : number){
@@ -26,7 +21,7 @@ export class DataAccessLayer{
     // CRUD
     create(book : Book){
         this.library.push(book);
-        this.writeFile()
+        this.database.writeFile(this.library);
     }
 
     read() : Book[] {
@@ -36,11 +31,12 @@ export class DataAccessLayer{
     update(book : Book){
         let idx = this.findBookIdx(book.id);
         this.library[idx] = book;
-        this.writeFile();
+        this.database.writeFile(this.library);
     }
 
     delete(id : number){
         let idx = this.findBookIdx(id);
         this.library.splice(idx ,1);
+        this.database.writeFile(this.library);
     }
 }
