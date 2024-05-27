@@ -1,6 +1,7 @@
 import request from "supertest";
 import app from "../app"
-import {Book} from "../models/book"
+import { Book } from "../models/book"
+import { DataBaseJson } from '../n_layered/data_base_json';
 
 const strBooks = `[
     {
@@ -27,10 +28,14 @@ const strBooks = `[
 ]`;
 
 describe("API tests", () => {
+    let originalBooks: Book[];
 
-    const originalBooks : Book[] = JSON.parse(strBooks);
-
-    beforeAll(() => console.log('2 - beforeAll'));
+    beforeAll(() => {
+        originalBooks = JSON.parse(strBooks);
+        // Mock the methods of DataBaseJson class
+        DataBaseJson.prototype.readFile = jest.fn().mockReturnValue(originalBooks);
+        DataBaseJson.prototype.writeFile = jest.fn(); // No-op for writeFile
+      });
 
     it("tests /api/books", async () => {
         const response = await request(app).get("/api/books");
