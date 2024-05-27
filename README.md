@@ -9,6 +9,9 @@ NPM package prerequisites
 
 To start the server
 >tsc \
+>npm start
+
+To run Jest tests
 >npm test
 
 ## Unit Testing
